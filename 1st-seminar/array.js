@@ -42,4 +42,42 @@ console.log(location.join('->'));
 
 console.log(location.reverse().join('->'));
 
-// 아래거 마저 써보자.
+var countries = ['Korea', 'Japan', 'China'];
+console.log(countries.sort((a,b)=>a>b?1:-1));
+console.log(countries.sort(function(a,b) {returna.localeCompare(b);}));
+console.log('오름차순 정렬:', concatArr.sort((a,b)=>a-b));
+console.log('내림차순 정렬:', concatArr.sort(function(a,b){return b-a}));
+
+var number = [100,234,-125,1,23,-634,234,7,4,7,2];
+var minusNumber = number.filter(item=>item<0);
+console.log('minusNumber: ', minusNumber);
+
+var countries = ['Korea', 'Japan', 'China'];
+var countriesLengths = countries.map(item=>item.length);
+console.log('countriesLengths: ', countriesLengths);
+
+var number = [1,2,3,4,5,6,7,8,9,10];
+var sum = number.reduce((previousValue, currentValue)=>{
+    console.log(`previousValue : ${previousValue}, currentValue: ${currentValue}`);
+    return previousValue + currentValue;
+});
+
+console.log('sum= ', sum);
+
+var serverPart = ['김현기','석영현','강준우','송정우','신지혜','이영은','이진호'];
+let serverIndexStr = '서버파트 여러분 번호 한번 샐게요!';
+let serverPartMemberNameStr = '섭파트 여러분 이름 한번씩만 불러주세요~';
+
+for(let item in serverPart){
+    serverIndexStr += item + '!';
+}
+console.log(serverIndexStr);
+
+for(let item of serverPart){
+    serverPartMemberNameStr += item + '!';
+}
+console.log(serverPartMemberNameStr);
+
+serverPart.forEach(item=>{
+    console.log(item);
+});
