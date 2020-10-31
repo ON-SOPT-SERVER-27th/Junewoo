@@ -4,7 +4,6 @@ const util = require('../../modules/util');
 const responseMessage = require('../../modules/responseMessage');
 const statusCode = require('../../modules/statusCode');
 let membersDB = require('../../modules/members');
-const { response } = require('express');
 
 router.post('/', (req,res)=>{
     const {name, part, age} = req.body;
@@ -67,7 +66,32 @@ router.delete('/:idx', (req,res)=>{
 });
 
 router.put('/:idx', (req,res)=>{
-    // 이건 집에서 해오는걸로~
+    const {idx} = req.params;
+    const {name, part, age} = req.body;
+
+    if(!idx){
+        console.log('필요한 값이 없습니다!');
+        return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NULL_VALUE));
+    }
+
+    if(!name || !part || !age){
+        console.log('필요한 값이 없습니다!');
+        return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NULL_VALUE));
+    }
+
+    const memberIdx = membersDb.findIndex(member => member.idx == idx);
+
+    if(memberIdx === -1){
+        console.log('idx가 유효하지 않습니다.');
+        return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.NO_USER));
+    }
+
+    membersDB[memberIdx] = {
+        idx:Number.parseInt(idx),
+        name,
+        part,
+        age,
+    }
 });
 
 module.exports = router;
